@@ -3,6 +3,9 @@
 import Link from "next/link";
 import MagicalParticles from "@/components/MagicalParticles";
 import Navbar from "@/components/Navbar";
+import ModelViewer from "@/components/ModelViewer";
+import { useDesign } from "@/context/DesignContext";
+import { priceDesign, formatMoney } from "@/lib/pricing";
 
 /* ==============================
    Feature cards data
@@ -80,22 +83,22 @@ const STEPS = [
    Footer links
    ============================== */
 const FOOTER_LINKS = {
-  Product: [
-    { label: "Features", href: "#features" },
+  Platform: [
+    { label: "AI Outfit Scanner", href: "/upload" },
+    { label: "Atelier Customizer", href: "/customize" },
+    { label: "3D Mannequin View", href: "/preview" },
+    { label: "Dropship Pricing", href: "/pricing" },
+  ],
+  Workflow: [
+    { label: "Magical Features", href: "#features" },
+    { label: "Live Model Demo", href: "#live-model" },
     { label: "How It Works", href: "#how-it-works" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Upload", href: "/upload" },
+    { label: "Direct Checkout", href: "/checkout" },
   ],
-  Company: [
-    { label: "About", href: "/about" },
-    { label: "Blog", href: "/blog" },
-    { label: "Careers", href: "/careers" },
-    { label: "Contact", href: "/contact" },
-  ],
-  Legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-    { label: "Cookie Policy", href: "/cookies" },
+  Specifications: [
+    { label: "Barcode & Tag Scan", href: "/upload" },
+    { label: "Custom Typography", href: "/customize" },
+    { label: "Tailored Silhouettes", href: "/customize" },
   ],
 } as const;
 
@@ -169,6 +172,9 @@ function FloatingShapes() {
    Main Page Component
    ============================== */
 export default function HomePage() {
+  const { design } = useDesign();
+  const livePrice = priceDesign(design);
+
   return (
     <>
       <MagicalParticles />
@@ -267,6 +273,68 @@ export default function HomePage() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
+          </div>
+        </section>
+
+        {/* ======================== LIVE 3D MANNEQUIN SHOWCASE ======================== */}
+        <section id="live-model" className="relative py-20 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-[0_8px_40px_rgba(124,58,237,0.18)] grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-6 space-y-6">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-xs font-semibold text-amber-300">
+                  <span>🔮</span>
+                  <span>Interactive Hologram Mannequin</span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-purple-300 via-pink-200 to-amber-300 bg-clip-text text-transparent leading-tight">
+                  See Your Bespoke Outfit on a Live Model
+                </h2>
+                <p className="text-[#C4B5FD]/85 text-base leading-relaxed">
+                  Our supercomputer AI reconstructs brand silhouettes, measurements, collars, sleeve geometry, weave patterns, pockets, and custom lettering—then renders your creation on an interactive model before sending it directly to our dropship partner.
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                  <div className="rounded-xl bg-white/5 border border-white/10 p-3">
+                    <span className="text-purple-300/70 block">Active Garment</span>
+                    <span className="text-white font-bold text-sm">{design.garmentType} ({design.size})</span>
+                  </div>
+                  <div className="rounded-xl bg-white/5 border border-white/10 p-3">
+                    <span className="text-purple-300/70 block">Collar & Sleeves</span>
+                    <span className="text-white font-bold text-sm">{design.collar} · {design.sleeve}</span>
+                  </div>
+                  <div className="rounded-xl bg-white/5 border border-white/10 p-3 col-span-2 sm:col-span-1">
+                    <span className="text-purple-300/70 block">Dropship Price</span>
+                    <span className="text-amber-300 font-black text-base">{formatMoney(livePrice.unitPrice)}</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <Link
+                    href="/customize"
+                    className="rounded-xl bg-gradient-to-r from-purple-600 via-violet-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold px-6 py-3.5 text-sm transition-all shadow-[0_0_20px_rgba(124,58,237,0.45)] hover:scale-105"
+                  >
+                    ✨ Edit This Outfit in Atelier
+                  </Link>
+                  <Link
+                    href="/upload"
+                    className="rounded-xl bg-white/5 border border-white/15 hover:bg-white/10 text-white font-semibold px-6 py-3.5 text-sm transition-all"
+                  >
+                    🏷️ Scan Barcode / Photo
+                  </Link>
+                  <Link
+                    href="/checkout"
+                    className="rounded-xl bg-amber-500/15 border border-amber-400/30 hover:bg-amber-500/25 text-amber-200 font-semibold px-5 py-3.5 text-sm transition-all"
+                  >
+                    Order Direct →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="lg:col-span-6 flex justify-center">
+                <div className="w-full max-w-md rounded-2xl bg-[#0F0B1E]/60 border border-white/10 p-6 flex flex-col items-center">
+                  <ModelViewer design={design} />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

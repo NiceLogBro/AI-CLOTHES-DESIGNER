@@ -66,12 +66,16 @@ const PRICING_TIERS = [
 ];
 
 const FABRIC_PRICING = [
-  { garment: "Classic T-Shirt (220gsm Organic Cotton)", basePrice: "$29.99", estFabrication: "2 days" },
-  { garment: "Oxford Dress Shirt (Egyptian Cotton)", basePrice: "$48.00", estFabrication: "3 days" },
+  { garment: "Classic T-Shirt (220gsm Organic Cotton)", basePrice: "$29.00", estFabrication: "2 days" },
+  { garment: "Pleated Midi Skirt (Luxury Twill)", basePrice: "$42.00", estFabrication: "3 days" },
+  { garment: "Silk Touch Blouse (Mulberry Silk Alternate)", basePrice: "$44.00", estFabrication: "3 days" },
+  { garment: "Oxford Dress Shirt (Egyptian Cotton)", basePrice: "$49.00", estFabrication: "3 days" },
+  { garment: "Tailored Trousers / Pants", basePrice: "$54.00", estFabrication: "3 days" },
   { garment: "Heavyweight Hoodie (450gsm French Terry)", basePrice: "$59.00", estFabrication: "3 days" },
+  { garment: "Artisanal Knit Sweater (Merino Blend)", basePrice: "$64.00", estFabrication: "3 days" },
+  { garment: "Bespoke A-Line / Midi Dress", basePrice: "$69.00", estFabrication: "3 days" },
   { garment: "Tailored Blazer / Jacket (Italian Wool Blend)", basePrice: "$89.00", estFabrication: "4 days" },
-  { garment: "Silk Touch Blouse (Mulberry Silk Alternate)", basePrice: "$52.00", estFabrication: "3 days" },
-  { garment: "Pleated Midi Skirt / Dress", basePrice: "$49.00", estFabrication: "3 days" },
+  { garment: "Structured Trench / Overcoat", basePrice: "$119.00", estFabrication: "5 days" },
 ];
 
 export default function PricingPage() {
@@ -80,11 +84,11 @@ export default function PricingPage() {
   const [includePattern, setIncludePattern] = useState(false);
   const [includeEmbellishments, setIncludeEmbellishments] = useState(false);
 
-  const baseRate = 34.99;
+  const baseRate = 29.0;
   const unitAddons =
-    (includeLettering ? 5.0 : 0) +
+    (includeLettering ? 6.5 : 0) +
     (includePattern ? 8.0 : 0) +
-    (includeEmbellishments ? 7.0 : 0);
+    (includeEmbellishments ? 5.0 : 0);
   const subtotal = (baseRate + unitAddons) * calculatorQty;
   const volumeDiscount = calculatorQty >= 10 ? 0.25 : calculatorQty >= 5 ? 0.15 : 0;
   const discountedTotal = subtotal * (1 - volumeDiscount);
@@ -216,7 +220,7 @@ export default function PricingPage() {
                       onChange={(e) => setIncludeLettering(e.target.checked)}
                       className="accent-purple-500 rounded"
                     />
-                    <span className="text-xs text-purple-200">Lettering (+$5)</span>
+                    <span className="text-xs text-purple-200">Lettering (+$6.50)</span>
                   </label>
 
                   <label className="flex items-center gap-2 p-3 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
@@ -236,7 +240,7 @@ export default function PricingPage() {
                       onChange={(e) => setIncludeEmbellishments(e.target.checked)}
                       className="accent-purple-500 rounded"
                     />
-                    <span className="text-xs text-purple-200">Embellish (+$7)</span>
+                    <span className="text-xs text-purple-200">Hardware Detail (+$5)</span>
                   </label>
                 </div>
               </div>

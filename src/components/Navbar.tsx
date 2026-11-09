@@ -5,10 +5,11 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/upload", label: "Upload" },
-  { href: "/customize", label: "Customize" },
-  { href: "/preview", label: "Preview" },
+  { href: "/upload", label: "Scanner" },
+  { href: "/customize", label: "Customizer" },
+  { href: "/preview", label: "3D Model" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/checkout", label: "Checkout" },
 ] as const;
 
 export default function Navbar() {

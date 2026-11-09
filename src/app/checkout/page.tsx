@@ -2,6 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import MagicalParticles from "@/components/MagicalParticles";
 import { useDesign } from "@/context/DesignContext";
 import {
   SHIPPING_OPTIONS,
@@ -104,7 +106,9 @@ export default function CheckoutPage() {
     "w-full rounded-xl bg-white/5 border border-white/10 text-white placeholder-purple-300/30 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400/40 transition-all duration-300 backdrop-blur-sm";
 
   return (
-    <main className="min-h-screen bg-[#0F0B1E] text-[#F8F7FF] overflow-hidden relative">
+    <main className="min-h-screen bg-[#0F0B1E] text-[#F8F7FF] overflow-hidden relative pt-20">
+      <MagicalParticles />
+      <Navbar />
       {/* Background */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 right-1/4 w-[600px] h-[600px] rounded-full bg-purple-600/8 blur-[120px]" />

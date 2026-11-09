@@ -1,7 +1,9 @@
-﻿"use client";
+"use client";
 
 import type { ReactNode } from "react";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import MagicalParticles from "@/components/MagicalParticles";
 import ModelViewer from "@/components/ModelViewer";
 import { useDesign, SIZES, type Size } from "@/context/DesignContext";
 import { priceDesign, formatMoney } from "@/lib/pricing";
@@ -10,7 +12,9 @@ export default function PreviewPage() {
   const { design, setSize } = useDesign();
   const price = priceDesign(design);
   return (
-    <main className="min-h-screen bg-[#0F0B1E] text-[#F8F7FF] overflow-hidden">
+    <main className="min-h-screen bg-[#0F0B1E] text-[#F8F7FF] overflow-hidden pt-20">
+      <MagicalParticles />
+      <Navbar />
       {/* Background aurora */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-purple-600/10 blur-[120px]" />
